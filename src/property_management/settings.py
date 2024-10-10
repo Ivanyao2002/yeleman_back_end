@@ -95,7 +95,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('SQL_DATABASE', 'propertyManagementDB'),
         'USER': os.getenv('SQL_USER', 'postgres'),
-        'PASSWORD': os.getenv('SQL_PASSWORD', ''),
+        'PASSWORD': os.getenv('SQL_PASSWORD', 'root'),
         'HOST': os.getenv('SQL_HOST', 'localhost'),
         'PORT': os.getenv('SQL_PORT', '5432'),
     }
@@ -184,8 +184,8 @@ SIMPLE_JWT = {
 
 # Email SMTP CONFIG
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', '')
-EMAIL_PORT = os.getenv('EMAIL_PORT', '')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', '')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = os.getenv('EMAIL_PORT', '587')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'yaoivan2002@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'gcrm dbya wjio xgsv')
