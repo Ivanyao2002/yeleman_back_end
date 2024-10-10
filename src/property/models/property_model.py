@@ -5,14 +5,15 @@ from base.models.helpers.date_time_model import DateTimeModel
 class PropertyModel(DateTimeModel):
 
     owner = models.ForeignKey("owner.OwnerModel", on_delete=models.CASCADE, related_name="property_owner_id")
-    label = models.TextField(verbose_name="Commentaire ")
+    label = models.CharField(max_length=50, verbose_name="Libellé ")
     price = models.IntegerField(verbose_name="Prix ")
-    address = models.IntegerField(verbose_name="Localisation ")
-    surface = models.IntegerField(verbose_name="Surface ")
-    property_type = models.IntegerField(verbose_name="Type de propriété ")
-    description = models.IntegerField(verbose_name="Description ")
-    available = models.IntegerField(verbose_name="Disponibilité ")
+    address = models.CharField(max_length=50, verbose_name="Localisation ")
+    surface = models.FloatField(verbose_name="Surface ")
+    property_type = models.CharField(max_length=100, verbose_name="Type de propriété ")
+    description = models.TextField(verbose_name="Description ")
+    available = models.BooleanField(default=True, verbose_name="Disponibilité ")
     bedrooms_number = models.IntegerField(verbose_name="Nombre de chambres ")
+    video_url = models.URLField(verbose_name="Lien de la vidéo ")
 
     def __str__(self):
         return f"{self.label} - {self.property_type}"
