@@ -8,6 +8,7 @@ __pycache__/
 
 .idea/
 src/.env
+src/property_management/settings
 
 # Distribution / packaging
 .Python

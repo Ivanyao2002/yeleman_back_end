@@ -92,12 +92,13 @@ WSGI_APPLICATION = 'property_management.wsgi.application'
 DATABASES = {
 
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': os.getenv('SQL_DATABASE', 'propertyManagementDB'),
-        'USER': os.getenv('SQL_USER', 'postgres'),
-        'PASSWORD': os.getenv('SQL_PASSWORD', 'root'),
+        'USER': os.getenv('SQL_USER', 'root'),
+        'PASSWORD': os.getenv('SQL_PASSWORD', ''),
         'HOST': os.getenv('SQL_HOST', 'localhost'),
-        'PORT': os.getenv('SQL_PORT', '5432'),
+        'PORT': os.getenv('SQL_PORT', '3306'),
+    }
     }
 }
 
