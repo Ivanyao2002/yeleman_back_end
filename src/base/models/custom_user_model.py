@@ -3,6 +3,7 @@ from django.db import models
 import uuid
 from django.utils.text import slugify
 from django.contrib.auth.validators import UnicodeUsernameValidator
+from base.models.cards_type_enum import CardsTypeEnum
 
 
 class CustomUserManager(BaseUserManager):
@@ -34,11 +35,11 @@ class CustomUserModel(AbstractBaseUser):
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(max_length=150, unique=True, validators=[username_validator],
-                                help_text="Obligatoire ! 150 caractères ou moins. Seuls les lettres, chiffres et @/./+/-/_.",
+                                help_text="Obligatoire ! 150 caractères ou moins. Seuls les lettres, chiffres et "
+                                          "@/./+/-/_.",
                                 error_messages={
                                     "unique": "A user with that username already exists.",
-                                }, verbose_name="Nom d'utilisateur "
-                                )
+                                }, verbose_name="Nom d'utilisateur ")
     first_name = models.CharField(max_length=30, verbose_name="Nom ")
     last_name = models.CharField(max_length=60, verbose_name="Prénoms ")
     email = models.EmailField(unique=True, verbose_name="Email ")
@@ -46,7 +47,10 @@ class CustomUserModel(AbstractBaseUser):
     num_cni = models.CharField(max_length=250, unique=True, verbose_name="Numéro de la CNI ")
     image_recto = models.ImageField(upload_to='CNI/', verbose_name="Image du recto ")
     image_verso = models.ImageField(upload_to='CNI/', verbose_name="Image du verso ")
-    user_type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='LOCATAIRE', verbose_name="Type d'utilisateur ")
+    user_type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='LOCATAIRE',
+                                 verbose_name="Type d'utilisateur ")
+    cards_type = models.CharField(max_length=20, choices=CardsTypeEnum.choices,
+                                  default=CardsTypeEnum.CNI, verbose_name="Type de carte ")
     slug = models.SlugField(unique=True)
 
     is_active = models.BooleanField(default=False)

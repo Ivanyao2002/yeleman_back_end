@@ -5,6 +5,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
 from .viewsets import owner_viewset, tenant_viewset
+from .viewsets.property import visit_demand_viewset
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -16,12 +17,13 @@ schema_view = get_schema_view(
       license=openapi.License(name="BSD License"),
    ),
    public=True,
-   permission_classes=(permissions.AllowAny,),
+   permission_classes=[permissions.AllowAny],
 )
 
 router = DefaultRouter()
 router.register(r'owners', owner_viewset.OwnerViewSet, basename='owners')
 router.register(r'tenants', tenant_viewset.TenantViewSet, basename='tenants')
+router.register(r'visit-demands', visit_demand_viewset.VisitDemandViewSet, basename='visit_demands')
 
 urlpatterns = [
 

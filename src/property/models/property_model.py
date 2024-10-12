@@ -13,7 +13,7 @@ class PropertyModel(DateTimeModel):
     description = models.TextField(verbose_name="Description ")
     available = models.BooleanField(default=True, verbose_name="Disponibilité ")
     bedrooms_number = models.IntegerField(verbose_name="Nombre de chambres ")
-    video_url = models.URLField(verbose_name="Lien de la vidéo ")
+    video_url = models.URLField(verbose_name="Lien de la vidéo ", blank=True, null=True)
 
     def __str__(self):
         return f"{self.label} - {self.property_type}"
