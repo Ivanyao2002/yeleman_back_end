@@ -4,8 +4,11 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
+
 from .viewsets import owner_viewset
 from api.viewsets.property_viewset import PropertyViewset
+
+from .viewsets import owner_viewset, tenant_viewset
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -22,7 +25,10 @@ schema_view = get_schema_view(
 
 router = DefaultRouter()
 router.register(r'owners', owner_viewset.OwnerViewSet, basename='owners')
+
 router.register(r'property', PropertyViewset) 
+
+router.register(r'tenants', tenant_viewset.TenantViewSet, basename='tenants')
 
 
 urlpatterns = [
