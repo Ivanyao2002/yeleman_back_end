@@ -3,9 +3,9 @@ from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from property.models.property_model import PropertyModel
 
 
-class VisitDemandSerializer(ModelSerializer):
+class LocationDemandSerializer(ModelSerializer):
     property = PrimaryKeyRelatedField(queryset=PropertyModel.objects.filter(status=True))
 
     class Meta:
         model = DemandModel
-        fields = ['id', 'tenant', 'property', 'visit_date', 'comment']
+        fields = ['id', 'tenant', 'property', 'comment']

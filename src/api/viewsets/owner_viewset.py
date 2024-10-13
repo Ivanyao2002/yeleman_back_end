@@ -1,7 +1,7 @@
 import random
 from rest_framework.permissions import AllowAny
 from django.utils import timezone
-from rest_framework import status, generics
+from rest_framework import status, generics, mixins, viewsets
 from rest_framework.response import Response
 from owner.models.owner_model import OwnerModel
 from base.models.otp_token_model import OtpTokenModel
@@ -10,12 +10,14 @@ from ..serializers.otp_serializer import OtpSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
-class OwnerViewSet(ModelViewSet):
-    http_method_names = ['get', 'post', 'put']
+class OwnerViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                   viewsets.GenericViewSet):
     queryset = OwnerModel.objects.filter(is_active=True)
     serializer_class = OwnerSerializer
     permission_classes = [AllowAny]
@@ -26,10 +28,10 @@ class OwnerViewSet(ModelViewSet):
             serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
             serializer.validated_data['user_type'] = 'PROPRIETAIRE'
             owner = serializer.save()
-            otp_code = str(random.randint(100000, 999999))
+            otp_code = str(random.randint(1000, 9999))
             otp_token = OtpTokenModel.objects.create(user=owner, otp_code=otp_code,
-                        otp_expires_at=timezone.now() + timezone.timedelta(minutes=5))
-            send_otp(owner.email, otp_code)
+                                                     otp_expires_at=timezone.now() + timezone.timedelta(minutes=5))
+            send_otp(owner.email, otp_code, owner.username)
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
             return Response({"detail": "Un OTP a été envoyé.",
@@ -59,7 +61,8 @@ class OtpVerifyView(generics.GenericAPIView):
         username = request.data.get('username')
 
         if not username or not otp_code:
-            return Response({"error": "Le nom d'utilisateur et le code sont requis."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "Le nom d'utilisateur et le code sont requis."},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         try:
             otp_token = OtpTokenModel.objects.get(user__username=username, otp_code=otp_code)
@@ -76,12 +79,16 @@ class OtpVerifyView(generics.GenericAPIView):
             return Response({"detail": "OTP invalide."}, status=status.HTTP_400_BAD_REQUEST)
 
 
-def send_otp(email, otp_code):
-    subject = 'Votre code OTP'
-    message = f'Votre code OTP est : {otp_code}. Il est valide pendant 5 minutes.'
+def send_otp(email_address, otp_code, owner):
+    subject = 'Vérification de votre code OTP'
+    html_message = render_to_string('email_otp.html', {'user': owner, 'otp_code': otp_code})
+    plain_message = strip_tags(html_message)
     from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = [email_address]
 
     try:
-        send_mail(subject, message, from_email, [email])
+        email = EmailMultiAlternatives(subject=subject, body=plain_message, from_email=from_email, to=recipient_list)
+        email.attach_alternative(html_message, "text/html")
+        email.send()
     except Exception as e:
         print(f"Erreur lors de l'envoi de l'OTP : {e}")

@@ -4,7 +4,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class FolderModel(DateTimeModel):
 
-    owner = models.ForeignKey("owner.OwnerModel", on_delete=models.CASCADE, related_name="folder_owner_id")
+    owner = models.ForeignKey("owner.OwnerModel", on_delete=models.CASCADE, related_name="folders")
     acd_number = models.CharField(max_length=30, verbose_name="Numéro de l'ACD ")
     property_type = models.CharField(max_length=30, verbose_name="Type de propriété ")
     localization = models.CharField(max_length=30, verbose_name="Localisation ")
