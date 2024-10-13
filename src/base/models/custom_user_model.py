@@ -43,8 +43,8 @@ class CustomUserModel(AbstractBaseUser):
     first_name = models.CharField(max_length=30, verbose_name="Nom ")
     last_name = models.CharField(max_length=60, verbose_name="Prénoms ")
     email = models.EmailField(unique=True, verbose_name="Email ")
-    phone_number = models.CharField(max_length=15, verbose_name="Téléphone ")
-    num_cni = models.CharField(max_length=250, unique=True, verbose_name="Numéro de la CNI ")
+    phone_number = models.CharField(max_length=15, verbose_name="Téléphone ", unique=True)
+    num_cni = models.CharField(max_length=250, unique=True, verbose_name="ID de la carte ")
     image_recto = models.ImageField(upload_to='CNI/', verbose_name="Image du recto ")
     image_verso = models.ImageField(upload_to='CNI/', verbose_name="Image du verso ")
     user_type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='LOCATAIRE',

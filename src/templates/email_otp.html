@@ -1,0 +1,92 @@
+{% load static %}
+<html>
+    <head>
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+            }
+
+            .email-container {
+                max-width: 600px;
+                margin: 20px auto;
+                background-color: white;
+                border: 1px solid #ddd;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            }
+
+            .header {
+                background-color: #f8f8f8;
+                padding: 20px;
+                border-bottom: 1px solid #eee;
+            }
+
+            .logo {
+                width: 150px;
+                height: auto;
+            }
+
+            .content {
+                background-color: #4285F4;
+                color: white;
+                padding: 30px;
+            }
+
+            h1 {
+                margin-top: 0;
+                font-size: 24px;
+            }
+
+            .otp {
+                font-size: 20px;
+                font-weight: bold;
+                margin: 15px 0;
+            }
+
+            .button {
+                display: inline-block;
+                background-color: white;
+                color: #4285F4;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                margin-top: 15px;
+            }
+
+            .footer {
+                padding: 20px;
+                font-size: 12px;
+                color: #666;
+                text-align: center;
+            }
+
+            .footer a {
+                color: #4285F4;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="email-container">
+            <div class="header">
+                <img src="{% static 'img/yeleman.jpg' %}" alt="yeleman ci">
+                <h2>YELEMAN CI</h2>
+            </div>
+            <div class="content">
+                <h1>Hey {{ user }},</h1>
+                <p>Bienvenue! Pour assurer la sécurité de votre compte, nous devons vérifier votre adresse e-mail.</p>
+                <p>Veuillez saisir ce code dans les 05 minutes suivant la réception de cet e-mail pour compléter votre processus de vérification.</p>
+                <p class="otp">Voici votre mot de passe à usage unique (OTP): {{ otp_code }}</p>
+                <p>Merci de votre coopération.</p>
+            </div>
+            <div class="footer">
+                <p>Si vous avez des questions ou des réclamations, veuillez nous contacter.</p>
+                <p><a href="https://fatsquirrel.com/terms">Conditions d'Utilisation</a> | <a href="https://fatsquirrel.com/privacy">Politique de Confidentialité</a> | <a href="https://fatsquirrel.com/contact">Contactez-Nous</a></p>
+                <p>YELEMAN CI 123 ABC St. Côte d'Ivoire, NY 22100</p>
+            </div>
+        </div>
+    </body>
+</html>

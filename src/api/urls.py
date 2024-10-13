@@ -5,33 +5,28 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
 
-from .viewsets import owner_viewset
-from api.viewsets.property_viewset import PropertyViewset
-
 from .viewsets import owner_viewset, tenant_viewset
-from .viewsets.property import visit_demand_viewset
+from .viewsets.property import visit_demand_viewset, property_viewset, location_demand_viewset
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="YELEMANCI API",
-      default_version='v1.4',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
-      license=openapi.License(name="BSD License"),
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
+    openapi.Info(
+        title="YELEMANCI API",
+        default_version='v1.4',
+        description="Test description",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@snippets.local"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
 )
 
 router = DefaultRouter()
+router.register(r'properties', property_viewset.PropertyViewSet, basename='properties')
 router.register(r'owners', owner_viewset.OwnerViewSet, basename='owners')
-
-router.register(r'property', PropertyViewset) 
-
 router.register(r'tenants', tenant_viewset.TenantViewSet, basename='tenants')
 router.register(r'visit-demands', visit_demand_viewset.VisitDemandViewSet, basename='visit_demands')
-
+router.register(r'location-demands', location_demand_viewset.LocationDemandViewSet, basename='location_demands')
 
 urlpatterns = [
 

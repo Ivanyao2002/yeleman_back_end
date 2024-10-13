@@ -4,7 +4,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class CommentModel(DateTimeModel):
 
-    property = models.ForeignKey("property.PropertyModel", on_delete=models.CASCADE, related_name="comment_property_id")
+    property = models.ForeignKey("property.PropertyModel", on_delete=models.CASCADE, related_name="comments")
     content = models.TextField(verbose_name="Commentaire ")
     note = models.IntegerField(verbose_name="Note ")
 
