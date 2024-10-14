@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshVie
 
 from .viewsets import owner_viewset, tenant_viewset
 from .viewsets.property import visit_demand_viewset, property_viewset, location_demand_viewset
+from .viewsets.transaction import subscription_viewset, payment_viewset
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -27,6 +28,8 @@ router.register(r'owners', owner_viewset.OwnerViewSet, basename='owners')
 router.register(r'tenants', tenant_viewset.TenantViewSet, basename='tenants')
 router.register(r'visit-demands', visit_demand_viewset.VisitDemandViewSet, basename='visit_demands')
 router.register(r'location-demands', location_demand_viewset.LocationDemandViewSet, basename='location_demands')
+router.register(r'payments', payment_viewset.PaymentViewSet, basename='payments')
+router.register(r'subscriptions', subscription_viewset.SubscriptionViewSet, basename='subscriptions')
 
 urlpatterns = [
 

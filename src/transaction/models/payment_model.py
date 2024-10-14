@@ -4,11 +4,7 @@ from base.models.payment_type_enum import PaymentTypeEnum
 
 
 class PaymentModel(DateTimeModel):
-
-    tenant = models.ForeignKey("tenant.TenantModel", on_delete=models.CASCADE, blank=True, null=True,
-                               related_name="payments_tenant")
-    owner = models.ForeignKey("owner.OwnerModel", on_delete=models.CASCADE, blank=True, null=True,
-                              related_name="payments_owner")
+    user = models.ForeignKey("base.CustomUserModel", on_delete=models.CASCADE)
     payment_type = models.CharField(max_length=20, choices=PaymentTypeEnum.choices,
                                     default=PaymentTypeEnum.SUBSCIPTION, verbose_name="Type de paiement ")
 

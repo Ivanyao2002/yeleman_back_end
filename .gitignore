@@ -8,7 +8,8 @@ __pycache__/
 
 .idea/
 src/.env
-
+src/base/signals/signals.py
+src/property_management/management/commands/create_superuser.py
 src/CNI/
 
 # Distribution / packaging

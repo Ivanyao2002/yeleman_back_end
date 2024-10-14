@@ -20,8 +20,10 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, username, password=None):
         user = self.create_user(username=username, password=password)
+        user.is_active = True
         user.is_staff = True
-        user.is_superuser = True
+        user.is_admin = True
+        user.user_type = 'ADMIN'
         user.save()
         return user
 
@@ -58,6 +60,12 @@ class CustomUserModel(AbstractBaseUser):
     is_admin = models.BooleanField(default=False)
     USERNAME_FIELD = 'username'
     objects = CustomUserManager()
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
 
     def __str__(self):
         return f"{self.username}"
