@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -66,6 +68,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # Custom Middleware
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = 'property_management.urls'
@@ -127,6 +130,11 @@ AUTH_USER_MODEL = "base.CustomUserModel"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+LANGUAGES = (
+    ("en", "English"),
+    ("it", "Italiano"),
+    ("fr", "Français"),
+)
 
 LANGUAGE_CODE = 'en-us'
 
@@ -144,6 +152,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
