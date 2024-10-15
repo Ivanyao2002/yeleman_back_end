@@ -1,11 +1,12 @@
-from rest_framework.viewsets import ModelViewSet
+from rest_framework import viewsets, mixins
 from property.models.demand_model import DemandModel
 from rest_framework import status
 from rest_framework.response import Response
 from api.serializers.property.location_demand_serializer import LocationDemandSerializer
 
 
-class LocationDemandViewSet(ModelViewSet):
+class LocationDemandViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin,
+                            mixins.RetrieveModelMixin, mixins.DestroyModelMixin, viewsets.GenericViewSet):
     queryset = DemandModel.objects.filter(status=True, demand_type='LOCATION')
     serializer_class = LocationDemandSerializer
 

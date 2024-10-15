@@ -22,16 +22,24 @@ leurs futures locataires. Nous nous sommes donnés pour vocation de simplifier l
 
 1. [ ]  Administrateur
 - Validation du dossier des propriétaires
+- Ajout des formules de souscriptions
 - Génération de contrats
+
 2. [ ]  Propriétaire
+- Ajout de propriétés
 - Validation des demandes de visite
+- Validation des demandes de locations
+- Souscription au compte premium
+
 3. [ ]  Locataire
 - Demande de visite
+- Demande de location
+- Souscription au compte premium
 
 ## Les étapes d'installation de l'application :
 - Ouvrer un terminal puis cloner le lien github de l'application : 
 ```bash
- git clone https://github.com/Ivanyao2002/Fitness_tracking_api.git
+ git clone https://github.com/Ivanyao2002/yeleman_back_end.git
  ```
 - Créer un environnement virtuel dans le repertoire 
 ```bash
@@ -62,5 +70,5 @@ leurs futures locataires. Nous nous sommes donnés pour vocation de simplifier l
  ``` 
 - Vous pouvez tester avec le navigateur ou avec Postman 
 - Lien vers l'api : http://127.0.0.1:8000/api/
-- Lien vers la documentation : 
+- Lien vers la documentation : http://127.0.0.1:8000/api/swagger/
 

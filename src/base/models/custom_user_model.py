@@ -47,8 +47,8 @@ class CustomUserModel(AbstractBaseUser):
     email = models.EmailField(unique=True, verbose_name="Email ")
     phone_number = models.CharField(max_length=15, verbose_name="Téléphone ", unique=True)
     num_cni = models.CharField(max_length=250, unique=True, verbose_name="ID de la carte ")
-    image_recto = models.ImageField(upload_to='CNI/', verbose_name="Image du recto ")
-    image_verso = models.ImageField(upload_to='CNI/', verbose_name="Image du verso ")
+    image_recto = models.ImageField(upload_to='CNI/', verbose_name="Image du recto ", blank=True, null=True)
+    image_verso = models.ImageField(upload_to='CNI/', verbose_name="Image du verso ", blank=True, null=True)
     user_type = models.CharField(max_length=15, choices=TYPE_CHOICES, default='LOCATAIRE',
                                  verbose_name="Type d'utilisateur ")
     cards_type = models.CharField(max_length=20, choices=CardsTypeEnum.choices,
