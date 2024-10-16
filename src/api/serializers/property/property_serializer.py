@@ -6,7 +6,7 @@ from property.models.characteristic_property_model import CharacteristicProperty
 
 
 class PropertySerializer(serializers.ModelSerializer):
-    owner = serializers.PrimaryKeyRelatedField(queryset=OwnerModel.objects.filter(is_active=True))
+    owner = serializers.PrimaryKeyRelatedField(queryset=OwnerModel.objects.filter(user__is_active=True))
     characteristics = CharacteristicPropertySerializer(many=True)
 
     class Meta:

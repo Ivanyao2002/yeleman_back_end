@@ -4,7 +4,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class SubscriptionModel(DateTimeModel):
 
-    user = models.ForeignKey("base.CustomUserModel", on_delete=models.CASCADE)
+    user = models.ForeignKey("user.CustomUserModel", on_delete=models.CASCADE)
     subscription_plan = models.ForeignKey("transaction.SubscriptionPlanModel", on_delete=models.CASCADE)
     ended = models.DateTimeField(verbose_name="Date de fin d'abonnement ")
 

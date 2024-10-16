@@ -4,8 +4,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 
 class HistoricModel(DateTimeModel):
 
-    owner = models.ForeignKey("owner.OwnerModel", on_delete=models.CASCADE, blank=True, null=True)
-    tenant = models.ForeignKey("tenant.TenantModel", on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey("user.CustomUserModel", on_delete=models.CASCADE)
     subscription_plan = models.ForeignKey("transaction.SubscriptionPlanModel", on_delete=models.CASCADE)
 
     def __str__(self):

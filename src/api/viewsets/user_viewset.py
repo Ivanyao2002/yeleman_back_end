@@ -4,12 +4,14 @@ from rest_framework.permissions import AllowAny
 from django.utils import timezone
 from rest_framework.response import Response
 from rest_framework import status, generics, mixins, viewsets
-from base.models.custom_user_model import CustomUserModel
-from base.models.otp_token_model import OtpTokenModel
+from user.models.custom_user_model import CustomUserModel
+from user.models.otp_token_model import OtpTokenModel
 from ..serializers.user_serialiser import UserSerializer
 from ..serializers.otp_serializer import OtpSerializer
 from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import action
+from owner.models.owner_model import OwnerModel
+from tenant.models.tenant_model import TenantModel
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
@@ -31,6 +33,10 @@ class UserViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.Upd
         if serializer.is_valid():
             serializer.validated_data['password'] = make_password(serializer.validated_data['password'])
             user = serializer.save()
+            if serializer.validated_data['user_type'] == 'PROPRIETAIRE':
+                owner = OwnerModel.objects.create(user=user)
+            else:
+                tenant = TenantModel.objects.create(user=user)
             otp_code = str(random.randint(1000, 9999))
             otp_token = OtpTokenModel.objects.create(user=user, otp_code=otp_code,
                                                      otp_expires_at=timezone.now() + timezone.timedelta(minutes=5))
@@ -41,7 +47,7 @@ class UserViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.Upd
             return Response({
                 "detail": "Un OTP a été envoyé.",
                 "username": user.username,
-                             }, status=status.HTTP_201_CREATED, headers=headers)
+            }, status=status.HTTP_201_CREATED, headers=headers)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, *args, **kwargs):
@@ -91,6 +97,27 @@ class OtpVerifyViewSet(viewsets.ViewSet):
 
         except OtpTokenModel.DoesNotExist:
             return Response({"detail": "OTP invalide."}, status=status.HTTP_400_BAD_REQUEST)
+
+    def regenerate_otp(self, request):
+        username = request.data.get('username')
+
+        if not username:
+            return Response({"error": "Le nom d'utilisateur est requis."},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = CustomUserModel.objects.get(username=username)
+            otp_code = str(random.randint(1000, 9999))
+            otp_token = OtpTokenModel.objects.create(user=user, otp_code=otp_code,
+                                                     otp_expires_at=timezone.now() + timezone.timedelta(minutes=5))
+
+            send_otp(user.email, otp_code, user.username)
+
+            return Response({"detail": "Un nouveau code OTP a été envoyé."}, status=status.HTTP_200_OK)
+
+        except CustomUserModel.DoesNotExist:
+            return Response({"detail": "Utilisateur non trouvé."}, status=status.HTTP_404_NOT_FOUND)
+
 
 def send_otp(email_address, otp_code, user):
     subject = 'Vérification de votre code OTP'

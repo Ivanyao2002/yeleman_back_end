@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'owner.apps.OwnerConfig',
     'tenant.apps.TenantConfig',
+    'user.apps.UserConfig',
     'property.apps.PropertyConfig',
     'transaction.apps.TransactionConfig',
 ]
@@ -136,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "base.CustomUserModel"
+AUTH_USER_MODEL = "user.CustomUserModel"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -170,14 +171,14 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Rest Framework
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': [
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ],
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ],
+# }
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {

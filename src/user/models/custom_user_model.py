@@ -1,4 +1,5 @@
 from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 import uuid
 from django.utils.text import slugify
@@ -22,13 +23,14 @@ class CustomUserManager(BaseUserManager):
         user = self.create_user(username=username, password=password)
         user.is_active = True
         user.is_staff = True
+        user.is_superuser = True
         user.is_admin = True
         user.user_type = 'ADMIN'
         user.save()
         return user
 
 
-class CustomUserModel(AbstractBaseUser):
+class CustomUserModel(AbstractBaseUser, PermissionsMixin):
     TYPE_CHOICES = [
         ('LOCATAIRE', 'LOCATAIRE'),
         ('PROPRIETAIRE', 'PROPRIETAIRE'),

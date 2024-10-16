@@ -7,4 +7,4 @@ from django.db import models
 class PaymentTypeEnum(models.TextChoices):
 
     SUBSCIPTION = "Abonnement", _("Abonnement")
-    RENT_PAYMENT = "Paiment de loyer", _("Paiment de loyer")
+    RENT_PAYMENT = "Paiement de loyer", _("Paiement de loyer")

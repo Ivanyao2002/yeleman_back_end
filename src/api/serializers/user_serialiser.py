@@ -1,4 +1,4 @@
-from base.models.custom_user_model import CustomUserModel
+from user.models.custom_user_model import CustomUserModel
 from rest_framework.serializers import ModelSerializer
 
 
