@@ -5,7 +5,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView, TokenVerifyView)
 
-from .viewsets import owner_viewset, tenant_viewset, user_viewset
+from .viewsets import owner_viewset, tenant_viewset
+from .viewsets.user import user_viewset, login_viewset
 from .viewsets.property import visit_demand_viewset, property_viewset, location_demand_viewset
 from .viewsets.transaction import subscription_viewset, payment_viewset
 
@@ -36,6 +37,7 @@ urlpatterns = [
 
     path('', include(router.urls)),
     path('otp/verify/', user_viewset.OtpVerifyViewSet.as_view({'post': 'create'}), name='verify-otp'),
+    path('login/', login_viewset.LoginViewSet.as_view({'post': 'login'}), name='login'),
     path('otp/regenerate/', user_viewset.OtpVerifyViewSet.as_view({'post': 'regenerate_otp'}), name='otp-regenerate'),
     path('api-auth/', include('rest_framework.urls')),
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

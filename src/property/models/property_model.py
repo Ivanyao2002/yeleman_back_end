@@ -12,7 +12,8 @@ class PropertyModel(DateTimeModel):
     property_type = models.CharField(max_length=100, verbose_name="Type de propriété ")
     description = models.TextField(verbose_name="Description ")
     bedrooms_number = models.IntegerField(verbose_name="Nombre de chambres ")
-    video_url = models.URLField(verbose_name="Lien de la vidéo ", blank=True, null=True)
+    link_3d = models.JSONField(verbose_name="Lien de la vidéo ", blank=True, null=True)
+    image_url = models.JSONField(verbose_name="Lien de la vidéo ", blank=True, null=True)
 
     def __str__(self):
         return f"{self.label} - {self.property_type}"

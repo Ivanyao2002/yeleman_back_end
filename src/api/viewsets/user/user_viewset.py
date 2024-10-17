@@ -3,21 +3,19 @@ import random
 from rest_framework.permissions import AllowAny
 from django.utils import timezone
 from rest_framework.response import Response
-from rest_framework import status, generics, mixins, viewsets
+from rest_framework import status, mixins, viewsets
 from user.models.custom_user_model import CustomUserModel
 from user.models.otp_token_model import OtpTokenModel
-from ..serializers.user_serialiser import UserSerializer
-from ..serializers.otp_serializer import OtpSerializer
+from api.serializers.user.user_serialiser import UserSerializer
+from api.serializers.otp_serializer import OtpSerializer
 from django.contrib.auth.hashers import make_password
-from rest_framework.decorators import action
 from owner.models.owner_model import OwnerModel
 from tenant.models.tenant_model import TenantModel
-from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.views import APIView
 
 logger = logging.getLogger(__name__)
 
