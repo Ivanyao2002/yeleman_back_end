@@ -1,0 +1,44 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+
+{%block branding%}   
+
+    <h1>
+        <img src="https://res.cloudinary.com/dcjjkfjas/image/upload/v1731670913/yeleman_p987u4.jpg" alt="YelemanCIAdmin"
+             style="height: 50px; vertical-align: middle;">
+        YelemanCIAdmin
+    </h1>
+
+{% endblock %}
+
+{%block extrastyle%}
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    <style>
+
+        #header {
+            background-color: #3D6EEB;
+        }
+        #content>h1 {
+            color: #3D6EEB;
+            font-weight: bold;
+        }
+
+        #branding h1 {
+
+            color: beige;
+                /* text-transform: capitalize; */
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .submit-row > input {
+            background-color: #3D6EEB;
+        }
+
+
+    </style>
+
+{% endblock %}
+{% block content_title %}{% if title %}<h1>Tableau de bord | Administrateur</h1>{% endif %}{% endblock %}
+

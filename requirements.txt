@@ -1,7 +1,5 @@
 asgiref==3.8.1
 Django==5.1.1
-django-admin-interface==0.28.9
-django-colorfield==0.11.0
 django-cors-headers==4.5.0
 djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
@@ -19,3 +17,13 @@ sqlparse==0.5.1
 text-unidecode==1.3
 tzdata==2024.2
 uritemplate==4.1.1
+certifi==2024.8.30
+charset-normalizer==3.4.0
+cloudinary==1.41.0
+django-cloudinary-storage==0.3.0
+idna==3.10
+requests==2.32.3
+setuptools==65.5.1
+six==1.16.0
+urllib3==2.2.3
+wheel==0.38.4

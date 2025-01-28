@@ -1,0 +1,12 @@
+services:
+    yelemanPostgres:
+      image: postgres:15
+      environment:
+        - POSTGRES_USER=admin
+        - POSTGRES_PASSWORD=admin
+        - POSTGRES_DB=yeleman_DB
+      ports:
+        - 9001:5432
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+      restart: always

@@ -9,15 +9,6 @@
 leurs futures locataires. Nous nous sommes donnés pour vocation de simplifier les démarches énergivores et couteuses en lien avec les locations de logements. A travers notre application, nous garantissons un confort à la fois pour les locataires et les propriétaires de logements grace à nos procédures simplifiées.
 
 
-### Nos développeurs
-
-1. [ ]  YAO DAMO IVAN ODILON (Lead Technique)
-2. [ ]  KONE KOLOTIOLOMAN DIEUDONNE
-3. [ ]  KONATE AISSATA
-4. [ ]  COULIBALY ROKIA
-5. [ ]  KOFFI KOUADIO FRANCK VICTORIEN
-
-
 ## Liste des fonctionnalités
 
 1. [ ]  Administrateur
@@ -61,6 +52,43 @@ leurs futures locataires. Nous nous sommes donnés pour vocation de simplifier l
 ```bash
  python manage.py makemigrations 
  python manage.py migrate
+ ``` 
+
+## Variables du Fichier .env
+
+```plaintext
+# Clé secrète utilisée pour la sécurité de l'application
+SECRET_KEY='votre_cle_secrete'
+
+# Mode de débogage (True pour le développement, False pour la production)
+DEBUG=True  # À mettre sur False en production
+
+# Hôtes autorisés pour la connexion à l'application
+ALLOWED_HOSTS='localhost,127.0.0.1,*'
+CORS_ALLOWED_ORIGINS='http://localhost:4200'  # Hostname ou IP de l'application Angular
+CSRF_TRUSTED_ORIGINS='http://localhost:4200'
+
+# Configuration de la base de données
+SQL_ENGINE='django.db.backends.postgresql'
+SQL_DATABASE='nom_de_la_base_de_donnees'
+SQL_USER='nom_utilisateur'
+SQL_PASSWORD='votre_mot_de_passe'
+SQL_HOST='adresse_ip_ou_hostname'
+SQL_PORT='port_de_la_base_de_donnees' 
+
+# Configuration de l'envoi de mail
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER='votre_adresse_mail'
+EMAIL_HOST_PASSWORD='votre_mot_de_passe'
+DEFAULT_FROM_EMAIL="Titre"
+
+# Configuration de Cloudinary pour la gestion des médias
+CLOUDINARY_CLOUD_NAME='votre_nom_de_cloud'
+CLOUDINARY_API_KEY='votre_api_key'
+CLOUDINARY_API_SECRET='votre_api_secret'
  ``` 
  
 ## Les instructions de démarrage :

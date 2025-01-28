@@ -5,7 +5,7 @@ from base.models.helpers.date_time_model import DateTimeModel
 class CharacteristicPropertyModel(DateTimeModel):
 
     property = models.ForeignKey("property.PropertyModel", on_delete=models.CASCADE, related_name="characteristics")
-    swimming_pool = models.BooleanField(verbose_name="Commentaire ")
+    swimming_pool = models.BooleanField(verbose_name="Piscine ")
     green_space = models.BooleanField(verbose_name="Espace vert ")
     air_conditioning = models.BooleanField(verbose_name="Climatisation ")
     nearby_school_or_university = models.BooleanField(verbose_name="A proximité Ecole/Université ")

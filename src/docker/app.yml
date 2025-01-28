@@ -1,0 +1,19 @@
+name: yeleman-api
+services:
+  api:
+    depends_on:
+      - yelemanPostgres
+    image: ivan2509/yeleman-api:0.0.1
+    ports:
+      - 8080:8090
+    env_file:
+      - ../.env
+    restart: always
+
+  yelemanPostgres:
+    extends:
+      service: yelemanPostgres
+      file: postgres.yml
+
+volumes:
+  pgdata:
